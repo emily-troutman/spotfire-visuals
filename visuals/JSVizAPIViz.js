@@ -117,41 +117,41 @@ JSVizHelper.SetupViz({
       name: 'nodeColorColumn',
       enabledIfChecked: 'useNodeColorColumn'
     },
-    {
-      tab: 'Nodes',
-      caption: 'Use data to define node sizes',
-      type: 'checkbox',
-      name: 'useNodeSizeColumn'
-    },
-    {
-      tab: 'Nodes',
-      caption: 'Node size column',
-      type: 'column-number',
-      name: 'nodeSizeColumn',
-      enabledIfChecked: 'useNodeSizeColumn'
-    },
-    {
-      tab: 'Nodes',
-      caption: 'Use data to define node shapes',
-      type: 'checkbox',
-      name: 'useNodeShapeColumn'
-    },
-    {
-      tab: 'Nodes',
-      caption: 'Node shape column',
-      type: 'column-number',
-      name: 'nodeShapeColumn',
-      enabledIfChecked: 'useNodeShapeColumn'
-    },
-    {
-      tab: 'Nodes',
-      caption: 'Use the number of links to size the node (ignored if you have a node size column defined)',
-      type: 'checkbox',
-      name: 'nodeSizeOnLinkCount',
-      valueIfChecked: true,
-      valueIfUnchecked: false,
-      disabledIfChecked: 'useNodeSizeColumn'
-    },
+    // {
+    //   tab: 'Nodes',
+    //   caption: 'Use data to define node sizes',
+    //   type: 'checkbox',
+    //   name: 'useNodeSizeColumn'
+    // },
+    // {
+    //   tab: 'Nodes',
+    //   caption: 'Node size column',
+    //   type: 'column-number',
+    //   name: 'nodeSizeColumn',
+    //   enabledIfChecked: 'useNodeSizeColumn'
+    // },
+    // {
+    //   tab: 'Nodes',
+    //   caption: 'Use data to define node shapes',
+    //   type: 'checkbox',
+    //   name: 'useNodeShapeColumn'
+    // },
+    // {
+    //   tab: 'Nodes',
+    //   caption: 'Node shape column',
+    //   type: 'column-number',
+    //   name: 'nodeShapeColumn',
+    //   enabledIfChecked: 'useNodeShapeColumn'
+    // },
+    // {
+    //   tab: 'Nodes',
+    //   caption: 'Use the number of links to size the node (ignored if you have a node size column defined)',
+    //   type: 'checkbox',
+    //   name: 'nodeSizeOnLinkCount',
+    //   valueIfChecked: true,
+    //   valueIfUnchecked: false,
+    //   disabledIfChecked: 'useNodeSizeColumn'
+    // },
     {
       tab: 'Nodes',
       caption: 'Node minimum size',
@@ -174,14 +174,14 @@ JSVizHelper.SetupViz({
         step: 1
       }
     },
-    {
-      tab: 'Links',
-      caption: 'Show arrows on links',
-      type: 'checkbox',
-      name: 'linkShowArrows',
-      valueIfChecked: true,
-      valueIfUnchecked: false
-    },
+    // {
+    //   tab: 'Links',
+    //   caption: 'Show arrows on links',
+    //   type: 'checkbox',
+    //   name: 'linkShowArrows',
+    //   valueIfChecked: true,
+    //   valueIfUnchecked: false
+    // },
     {
       tab: 'Links',
       caption: 'Link line type',
@@ -611,17 +611,17 @@ function firstTimeSetup (data, config) {
     .attr('id', 'inverted')
     .append('feColorMatrix').attr('values', '-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0')
 
-  // Markers used for arrows
-  arrowDef = svgDefs.append('marker')
-    .attr('id', 'arrow')
-    .attr('markerWidth', 10)
-    .attr('markerHeight', 10)
-    .attr('refX', '9')
-    .attr('refY', '3')
-    .attr('orient', 'auto')
-    //    .attr('markerUnits', 'userSpaceOnUse')
-    .append('path')
-    .attr('d', 'M0,0 L0,6 L9,3 z')
+  // // Markers used for arrows
+  // arrowDef = svgDefs.append('marker')
+  //   .attr('id', 'arrow')
+  //   .attr('markerWidth', 10)
+  //   .attr('markerHeight', 10)
+  //   .attr('refX', '9')
+  //   .attr('refY', '3')
+  //   .attr('orient', 'auto')
+  //   //    .attr('markerUnits', 'userSpaceOnUse')
+  //   .append('path')
+  //   .attr('d', 'M0,0 L0,6 L9,3 z')
 
   // Set up the force simulation
   simulation = d3.forceSimulation()
@@ -635,8 +635,8 @@ function firstTimeSetup (data, config) {
   // colour scale to be used
   color = d3.scaleOrdinal(d3.schemeCategory10)
 
-  // Shape scale to be used
-  shape = d3.scaleOrdinal(d3.symbols)
+  // // Shape scale to be used
+  // shape = d3.scaleOrdinal(d3.symbols)
 
   // Size scale to be used
   sizeScale = d3.scaleLinear()
@@ -808,7 +808,7 @@ function render (data, config) {
   var restartSimulation = false
 
   // Tell Spotfire we're busy - we'll tell it we're finished when the simulation settles. This helps with exporting and printing
-  JSVizHelper.pushBusy('JSVizNetwork')
+  JSVizHelper.pushBusy('JSVizAPIViz')
 
   // Stop the simulation for now - we'll resume when we're done
   if (simulationRunning) simulation.stop()
@@ -931,7 +931,7 @@ function render (data, config) {
     .attr('stroke-width', function (d) { return linkThicknessScale(d.value) })
     .attr('stroke', config.linkColour)
     .attr('fill', 'transparent')
-    .attr('marker-end', function (d) { return (config.linkShowArrows.toString() === 'true') ? 'url(#arrow)' : '' })
+    // .attr('marker-end', function (d) { return (config.linkShowArrows.toString() === 'true') ? 'url(#arrow)' : '' })
     .attr('opacity', function (d) {
       return (data.baseTableHints.marked === 0) ? config.linkOpacity : ((d.source.hints.marked && d.target.hints.marked) ? 1 : 0.25)
     })

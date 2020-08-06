@@ -11,7 +11,8 @@ module.exports = function () {
       JSVizSankey: './visuals/JSVizSankey.js',
       JSVizAnimateData: './visuals/JSVizAnimateData.js',
       JSVizJustGage: './visuals/JSVizJustGage.js',
-      JSVizBulletList: './visuals/JSVizBulletList.js'
+      JSVizBulletList: './visuals/JSVizBulletList.js',
+      JSVizAPIViz: './visuals/JSVizAPIViz.js'
     },
     output: {
       // eslint-disable-next-line no-undef
