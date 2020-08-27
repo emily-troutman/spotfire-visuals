@@ -96,9 +96,9 @@ JSVizHelper.SetupViz({
     selector: '#js_chart svg',
     type: JSVizHelper.markType.svg
   },
-  configuratorTitle: 'Network Chart options',
+  configuratorTitle: 'API Visualization options',
   configuratorInstructions: [
-    '<p>The network chart requires two sets of data:</p>',
+    '<p>The API Visualization requires two sets of data:</p>',
     '<ul><li>The "nodes" table is specified first and contains information for the points in the chart.</li>',
     '<li>The "links" table is then specified with a list of links between nodes. Nodes are identified by the first column in the data and links specify two node ids along with the line thickness.</li></ul>',
     '<p>Nodes can optionally include other columns that can be used for tooltips, colours and shapes - use the settings below to link to the appropriate column.<br/>The min/max sizes for nodes and links are used to scale the incoming values - e.g. the node with the highest size value will be drawn using the max node size etc.</p>'
@@ -496,14 +496,14 @@ function Legend () {
       return (uniqueItems.length) * legendSpacing + legendSpacing * 3.5
     }
 
-    // Show shapes
-    shapeG
-      .style('visibility', config.useNodeShapeColumn ? null : 'hidden')
-      .attr('transform', 'translate(0,' + legendSpacing + ')')
+    // // Show shapes
+    // shapeG
+    //   .style('visibility', config.useNodeShapeColumn ? null : 'hidden')
+    //   .attr('transform', 'translate(0,' + legendSpacing + ')')
 
-    if (config.useNodeShapeColumn) {
-      yOffset += addToLegend(shapeG, shapeText, data.columns[config.nodeShapeColumn], data, config.nodeShapeColumn, true, function (d) { return shape(d) }, function (d) { return '#000' }, function (d) { return fontSize })
-    }
+    // if (config.useNodeShapeColumn) {
+    //   yOffset += addToLegend(shapeG, shapeText, data.columns[config.nodeShapeColumn], data, config.nodeShapeColumn, true, function (d) { return shape(d) }, function (d) { return '#000' }, function (d) { return fontSize })
+    // }
 
     // Show Colours
     colourG
@@ -664,7 +664,7 @@ function firstTimeSetup (data, config) {
       modal: true,
       closeOnEscape: true,
       width: Math.min(500, $('#js_chart').width() - 20),
-      title: 'Instructions for the Network Chart',
+      title: 'Instructions for the API Visualization',
       buttons: {
         OK: function () {
           $(this).dialog('close')
@@ -674,7 +674,7 @@ function firstTimeSetup (data, config) {
         $('.ui-dialog-titlebar-close', ui.dialog | ui).hide()
       }
     })
-
+// **** Will need to edit instructions once API Viz Functionality implemented.
   var instructions =
    'The network visualisation has two modes, which can be selected using the Mode button. In zoom/pan mode:' +
     '<ul><li>The mouse can be used to pan around the visualisation by clicking and dragging.</li>' +
@@ -872,6 +872,9 @@ function render (data, config) {
   var isNeighbour = function (a, b) {
     return a === b || linkedByIds[a.id + ',' + b.id] || linkedByIds[b.id + ',' + a.id]
   }
+
+  // helper function for highlighting connections between systems
+  // INSERT CODE HERE ?recursive function until hits another system? use linkedbyIds?
 
   // Figure out the size scale
   var domain = _.reduce(nodeData, function (result, d) {
